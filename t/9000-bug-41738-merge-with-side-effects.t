@@ -2,9 +2,6 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::Deep;
-
-plan qw/no_plan/;
 
 #use Data::Dump qw/dump/;
 #print dump($left), "\n";
@@ -43,3 +40,5 @@ $left->{foo}{bar} = 3 ;
 $left->{foo}{aaa} = 5 ;
 is_deeply $left, { foo => { bar => 3, aaa => 5 } };
 is_deeply $result, { foo => { aaa => 5, bar => 3 }, baz => 4 };
+
+done_testing;

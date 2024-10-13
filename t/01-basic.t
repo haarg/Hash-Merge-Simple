@@ -1,7 +1,6 @@
+use strict;
+use warnings;
 use Test::More;
-use Test::Deep;
-
-plan qw/no_plan/;
 
 use Hash::Merge::Simple qw/merge/;
 
@@ -38,3 +37,5 @@ if (0) {
     $a->{b} = $a;
     merge $a, $a;
 }
+
+done_testing;
