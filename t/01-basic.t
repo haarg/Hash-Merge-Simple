@@ -30,7 +30,7 @@ use Hash::Merge::Simple qw/merge/;
 }
 
 if (0) {
-    
+
     exit;
 
     # Infinity-ty-ty-ty-ty

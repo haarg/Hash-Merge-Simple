@@ -26,7 +26,7 @@ require Exporter;
     my $c = merge $a, $b;
     # $c is { a => 100, b => 2, c => 3, d => { i => 2, l => 4 }, r => {} }
 
-    # You can also merge more than two hashes at the same time 
+    # You can also merge more than two hashes at the same time
     # The precedence increases from left to right (the rightmost has the most precedence)
     my $everything = merge $this, $that, $mine, $yours, $kitchen_sink, ...;
 
@@ -95,7 +95,7 @@ sub merge (@) {
             $merge{$key} = $right->{$key};
         }
     }
-    
+
     return \%merge;
 }
 

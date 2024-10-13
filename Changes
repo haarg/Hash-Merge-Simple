@@ -12,7 +12,7 @@ TODO:
     - Conversion to Dist::Zilla (Dzpl), losing auto_install
 
 0.04 Saturday February 21 23:22:34 PST 2009:
-    - Addressed bug 41738: https://rt.cpan.org/Ticket/Display.html?id=41738 (thanks Uri) 
+    - Addressed bug 41738: https://rt.cpan.org/Ticket/Display.html?id=41738 (thanks Uri)
     - Updated boilerplate and Makefile.PL
     - Conversion of repository to git (github)
 
