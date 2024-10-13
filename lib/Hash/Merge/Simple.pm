@@ -4,10 +4,9 @@ package Hash::Merge::Simple;
 use warnings;
 use strict;
 
-use vars qw/ @ISA @EXPORT_OK /;
-require Exporter;
-@ISA = qw/ Exporter /;
-@EXPORT_OK = qw/ merge clone_merge dclone_merge /;
+use Exporter ();
+our @ISA = qw/ Exporter /;
+our @EXPORT_OK = qw/ merge clone_merge dclone_merge /;
 
 =head1 SYNOPSIS
 
