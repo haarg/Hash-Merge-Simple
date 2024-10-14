@@ -1,8 +1,8 @@
 package Hash::Merge::Simple;
-# ABSTRACT: Recursively merge two or more hashes, simply
-
-use warnings;
 use strict;
+use warnings;
+
+our $VERSION = '0.052';
 
 use Exporter ();
 our @ISA = qw/ Exporter /;
@@ -51,6 +51,10 @@ sub dclone_merge {
 
 1;
 __END__
+
+=head1 NAME
+
+Hash::Merge::Simple - Recursively merge two or more hashes, simply
 
 =head1 SYNOPSIS
 
@@ -131,7 +135,7 @@ Perform a merge, clone the merge, and return the result
 This is useful in cases where you need to ensure that the result can be tweaked without fear
 of giving/receiving any side effects
 
-This method will use L<Storable> (dclone) to do the cloning
+This method will use L<Storable> (C<dclone>) to do the cloning
 
 =head1 SEE ALSO
 
@@ -142,6 +146,8 @@ L<Catalyst::Utils>
 L<Clone>
 
 L<Storable>
+
+=for stopwords ACKNOWLEDGEMENTS Yuval Kogman Riedel
 
 =head1 ACKNOWLEDGEMENTS
 
