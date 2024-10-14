@@ -8,6 +8,50 @@ use Exporter ();
 our @ISA = qw/ Exporter /;
 our @EXPORT_OK = qw/ merge clone_merge dclone_merge /;
 
+# This was stoled from Catalyst::Utils... thanks guys!
+sub merge (@);
+sub merge (@) {
+    shift unless ref $_[0]; # Take care of the case we're called like Hash::Merge::Simple->merge(...)
+    my ($left, @right) = @_;
+
+    return $left unless @right;
+
+    return merge($left, merge(@right)) if @right > 1;
+
+    my ($right) = @right;
+
+    my %merge = %$left;
+
+    for my $key (keys %$right) {
+
+        my ($hr, $hl) = map { ref $_->{$key} eq 'HASH' } $right, $left;
+
+        if ($hr and $hl){
+            $merge{$key} = merge($left->{$key}, $right->{$key});
+        }
+        else {
+            $merge{$key} = $right->{$key};
+        }
+    }
+
+    return \%merge;
+}
+
+sub clone_merge {
+    require Clone;
+    my $result = merge @_;
+    return Clone::clone( $result );
+}
+
+sub dclone_merge {
+    require Storable;
+    my $result = merge @_;
+    return Storable::dclone( $result );
+}
+
+1;
+__END__
+
 =head1 SYNOPSIS
 
     use Hash::Merge::Simple qw/ merge /;
@@ -67,37 +111,6 @@ An example of this problem (thanks Uri):
     # $result->{a}{b} == 3 !
     # $result->{a}{d} == 5 !
 
-=cut
-
-# This was stoled from Catalyst::Utils... thanks guys!
-sub merge (@);
-sub merge (@) {
-    shift unless ref $_[0]; # Take care of the case we're called like Hash::Merge::Simple->merge(...)
-    my ($left, @right) = @_;
-
-    return $left unless @right;
-
-    return merge($left, merge(@right)) if @right > 1;
-
-    my ($right) = @right;
-
-    my %merge = %$left;
-
-    for my $key (keys %$right) {
-
-        my ($hr, $hl) = map { ref $_->{$key} eq 'HASH' } $right, $left;
-
-        if ($hr and $hl){
-            $merge{$key} = merge($left->{$key}, $right->{$key});
-        }
-        else {
-            $merge{$key} = $right->{$key};
-        }
-    }
-
-    return \%merge;
-}
-
 =head2 Hash::Merge::Simple->clone_merge( <hash1>, <hash2>, <hash3>, ..., <hashN> )
 
 =head2 Hash::Merge::Simple::clone_merge( <hash1>, <hash2>, <hash3>, ..., <hashN> )
@@ -109,14 +122,6 @@ of giving/receiving any side effects
 
 This method will use L<Clone> to do the cloning
 
-=cut
-
-sub clone_merge {
-    require Clone;
-    my $result = merge @_;
-    return Clone::clone( $result );
-}
-
 =head2 Hash::Merge::Simple->dclone_merge( <hash1>, <hash2>, <hash3>, ..., <hashN> )
 
 =head2 Hash::Merge::Simple::dclone_merge( <hash1>, <hash2>, <hash3>, ..., <hashN> )
@@ -127,14 +132,6 @@ This is useful in cases where you need to ensure that the result can be tweaked 
 of giving/receiving any side effects
 
 This method will use L<Storable> (dclone) to do the cloning
-
-=cut
-
-sub dclone_merge {
-    require Storable;
-    my $result = merge @_;
-    return Storable::dclone( $result );
-}
 
 =head1 SEE ALSO
 
@@ -156,4 +153,3 @@ Yuval Kogman C<nothingmuch@woobling.org>
 
 =cut
 
-1;
