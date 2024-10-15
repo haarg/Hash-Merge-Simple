@@ -7,7 +7,7 @@ TODO:
   - merge( [] ) # Transform even-element array into a hash
   - merge( [], [], ... ) # Merge even-element arrays (at the top level only)
 
-{{ $NEXT }}
+0.052   2024-10-15
   - drop Test::Most prereq, just use Test::More
   - use "our" rather than "use vars"
   - revised Dist::Zilla configuration
