@@ -8,6 +8,9 @@ TODO:
   - merge( [], [], ... ) # Merge even-element arrays (at the top level only)
 
 {{ $NEXT }}
+  - drop Test::Most prereq, just use Test::More
+  - use "our" rather than "use vars"
+  - revised Dist::Zilla configuration
 
 0.051   2010-12-07
   - Duh, require Exporter. Thanks, EVERYBODY/KENTNL
